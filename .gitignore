@@ -1,0 +1,64 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.env.*
+.venv/
+venv/
+env/
+ENV/
+
+# Packaging / distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Test / coverage
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.hypothesis/
+
+# C extensions
+*.so
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs and runtime files
+*.log
+gunicorn.pid
+gunicorn.error.log
+uvicorn.log
+celerybeat-schedule
+
+# Databases
+*.sqlite3
+*.db
+
+# Uploaded / generated files
+media/
+staticfiles/
+uploads/
+
+# Caches
+.mypy_cache/
+.cache/
+*.pyc
+
+# Node (if frontend assets)
+node_modules/
+
+# macOS
+.DS_Store

@@ -53,3 +53,38 @@ def create_producto_db(nombre: str, categoria_id: int) -> dict:
     db['productos'].append(new_producto)
     _save_db(db)
     return new_producto
+
+def update_producto_db(producto_id: int, nombre: str, categoria_id: int) -> dict:
+    """
+    Actualiza un producto existente.
+    """
+    db = _load_db()
+
+    # Verificar que la categoría existe
+    if not any(c['id'] == categoria_id for c in db['categorias']):
+        return {"error": "Categoría no encontrada"}
+
+    # Buscar y actualizar el producto
+    for producto in db['productos']:
+        if producto['id'] == producto_id:
+            producto['nombre'] = nombre
+            producto['categoria_id'] = categoria_id
+            _save_db(db)
+            return producto
+    
+    return {"error": "Producto no encontrado"}
+
+def delete_producto_db(producto_id: int) -> dict:
+    """
+    Elimina un producto existente.
+    """
+    db = _load_db()
+
+    # Buscar y eliminar el producto
+    for i, producto in enumerate(db['productos']):
+        if producto['id'] == producto_id:
+            deleted_producto = db['productos'].pop(i)
+            _save_db(db)
+            return {"mensaje": "Producto eliminado", "producto": deleted_producto}
+    
+    return {"error": "Producto no encontrado"}

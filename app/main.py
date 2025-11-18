@@ -15,10 +15,10 @@ def create_categoria_route(nombre: str):
     Llama a la lógica de negocio (CRUD) para crear una categoría.
     """
     return crud.create_categoria_db(nombre)
-# agregar esto despues del primer commit
-""" @app.get("/productos")
+
+@app.get("/productos")
 def get_all_productos_route():
-    return crud.get_productos() """
+    return crud.get_productos()
 
 @app.post("/productos")
 def create_producto_route(nombre: str, categoria_id: int):
@@ -31,3 +31,27 @@ def create_producto_route(nombre: str, categoria_id: int):
         raise HTTPException(status_code=404, detail=producto["error"])
         
     return producto
+
+@app.put("/productos/{producto_id}")
+def update_producto_route(producto_id: int, nombre: str, categoria_id: int):
+    """
+    Llama a la lógica de negocio (CRUD) para actualizar un producto.
+    """
+    producto = crud.update_producto_db(producto_id, nombre, categoria_id)
+    
+    if "error" in producto:
+        raise HTTPException(status_code=404, detail=producto["error"])
+        
+    return producto
+
+@app.delete("/productos/{producto_id}")
+def delete_producto_route(producto_id: int):
+    """
+    Llama a la lógica de negocio (CRUD) para eliminar un producto.
+    """
+    resultado = crud.delete_producto_db(producto_id)
+    
+    if "error" in resultado:
+        raise HTTPException(status_code=404, detail=resultado["error"])
+        
+    return resultado
